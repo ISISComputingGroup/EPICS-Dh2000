@@ -76,7 +76,10 @@ record(bi, "$(P)SIM:SHUTTER:STATUS"){
 #    field(ONAM, "TRIGGERED")
 #}
 #
-#record(bo, "$(P)SHUTTER:CLOSE"){
-#    field(DESC, "Closes the shutter")
-#    field(OUT, "@dh2000.proto closeShutter")
-#}
+record(bo, "$(P)SHUTTER:CLOSE"){
+    field(DESC, "Closes the shutter")
+    field(DTYP, "stream")
+    field(OUT, "@dh2000.proto closeShutter $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+}
