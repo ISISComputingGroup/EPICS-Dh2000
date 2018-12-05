@@ -1,18 +1,21 @@
-getIDN {
-    out "*IDN?";
-    in "%\$1[^\r\n]";
-    ExtraInput = Ignore;
+Terminator = '\r';
+ReplyTimeout = 2000;
+
+getStatus {
+    out "\&STS!";
+    in "\&ACK!";
+    in "\&A%d,I%(\$1)d!";
 }
 
-cmd {
-    out "\$1";
+openShutter {
+    out "\&OPENA!";
+    in "\&ACK!";
+
 }
 
-setD {
-    out "\$1 %d";
+closeShutter {
+    out "\&CLOSEA!";
+    in "\&ACK!";
+
 }
-getD {
-    out "\$1?";
-    in "%d";
-    ExtraInput = Ignore;
-}
+
