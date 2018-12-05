@@ -42,6 +42,7 @@ record(bi, "$(P)SHUTTER:STATUS"){
     field(DTYP, "stream")
     field(ZNAM, "CLOSED")
     field(ONAM, "OPEN")
+    field(SCAN, "1 second")
     field(INP, "@dh2000.proto getStatus($(P)INTERLOCK) $(PORT)")
     info(INTEREST, "HIGH")
     info(archive, "VAL")
