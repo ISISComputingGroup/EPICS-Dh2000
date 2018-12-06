@@ -60,15 +60,14 @@ record(bi, "$(P)SIM:SHUTTER:STATUS"){
 }
 
 
-#record(bo, "$(P)SHUTTER:OPEN"){
-#    field(DESC, "Opens the shutter")
-#    field(DTYP, "stream")
-#    field(SCAN, "Passive")
-#    field(OUT, "@dh2000.proto openShutter $(PORT)")
-#    field(SIML, "$(P)SIM")
-#    field(SDIS, "$(P)DISABLE")
-#    field(SIOL, "$(P)SIM:SHUTTER:OPEN")
-#}
+record(bo, "$(P)SHUTTER:OPEN"){
+    field(DESC, "Opens the shutter")
+    field(DTYP, "stream")
+    field(OUT, "@dh2000.proto openShutter $(PORT)")
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+    field(SIOL, "$(P)SIM:SHUTTER:OPEN")
+}
 #
 #record(bo, "$(P)SIM:SHUTTER:OPEN"){
 #    field(SCAN, "Passive")
