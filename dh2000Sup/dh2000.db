@@ -27,14 +27,6 @@ record(bi, "$(P)INTERLOCK"){
     info(archive, "VAL")
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
-    field(SIOL, "$(P)SIM:INTERLOCK")
-}
-
-record(bi, "$(P)SIM:INTERLOCK"){
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-    field(ZNAM, "OKAY")
-    field(ONAM, "TRIGGERED")
 }
 
 record(bi, "$(P)SHUTTER:STATUS"){
@@ -48,17 +40,7 @@ record(bi, "$(P)SHUTTER:STATUS"){
     info(archive, "VAL")
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
-    field(SIOL, "$(P)SIM:SHUTTER:STATUS")
-
 }
-
-record(bi, "$(P)SIM:SHUTTER:STATUS"){
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-    field(ZNAM, "OKAY")
-    field(ONAM, "TRIGGERED")
-}
-
 
 record(bo, "$(P)SHUTTER:OPEN"){
     field(DESC, "Opens the shutter")
@@ -66,16 +48,8 @@ record(bo, "$(P)SHUTTER:OPEN"){
     field(OUT, "@dh2000.proto openShutter $(PORT)")
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
-    field(SIOL, "$(P)SIM:SHUTTER:OPEN")
 }
-#
-#record(bo, "$(P)SIM:SHUTTER:OPEN"){
-#    field(SCAN, "Passive")
-#    field(DTYP, "Soft Channel")
-#    field(ZNAM, "OKAY")
-#    field(ONAM, "TRIGGERED")
-#}
-#
+
 record(bo, "$(P)SHUTTER:CLOSE"){
     field(DESC, "Closes the shutter")
     field(DTYP, "stream")
