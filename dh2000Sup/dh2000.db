@@ -57,3 +57,25 @@ record(bo, "$(P)SHUTTER:CLOSE"){
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
 }
+
+record(mbbo, "$(P)TOGGLE:SHUTTER:SP") {
+    field(DESC, "Toggle shutter open/closed")
+    field(DTYP, "Raw Soft Channel")
+
+    # Defines which PV to process in the fanout record
+    field(OUT, "$(P)_TOGGLE:SHUTTER.SELN PP")
+
+    field(ZRVL, "1")
+    field(ONVL, "2")
+
+    field(ZRST, "Open")
+    field(ONST, "Close")
+    info(INTEREST, "HIGH")
+}
+
+record(fanout, "$(P)_TOGGLE:SHUTTER") {
+    field(SELM, "Specified")
+
+    field(LNK1, "$(P)SHUTTER:OPEN PP")
+    field(LNK2, "$(P)SHUTTER:CLOSE PP")
+}
