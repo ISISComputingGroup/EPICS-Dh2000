@@ -23,10 +23,15 @@ record(bi, "$(P)INTERLOCK"){
     field(SCAN, "Passive")
     field(ZNAM, "OKAY")
     field(ONAM, "TRIGGERED")
+
+    field(OSV, "MAJOR")
+
     info(INTEREST, "HIGH")
     info(archive, "VAL")
+
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
+
 }
 
 record(bi, "$(P)SHUTTER:STATUS"){
@@ -36,8 +41,10 @@ record(bi, "$(P)SHUTTER:STATUS"){
     field(ONAM, "OPEN")
     field(SCAN, "1 second")
     field(INP, "@dh2000.proto getStatus($(P)INTERLOCK) $(PORT)")
+
     info(INTEREST, "HIGH")
     info(archive, "VAL")
+
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
 }
@@ -56,26 +63,4 @@ record(bo, "$(P)SHUTTER:CLOSE"){
     field(OUT, "@dh2000.proto closeShutter $(PORT)")
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
-}
-
-record(mbbo, "$(P)TOGGLE:SHUTTER:SP") {
-    field(DESC, "Toggle shutter open/closed")
-    field(DTYP, "Raw Soft Channel")
-
-    # Defines which PV to process in the fanout record
-    field(OUT, "$(P)_TOGGLE:SHUTTER.SELN PP")
-
-    field(ZRVL, "1")
-    field(ONVL, "2")
-
-    field(ZRST, "Open")
-    field(ONST, "Close")
-    info(INTEREST, "HIGH")
-}
-
-record(fanout, "$(P)_TOGGLE:SHUTTER") {
-    field(SELM, "Specified")
-
-    field(LNK1, "$(P)SHUTTER:OPEN PP")
-    field(LNK2, "$(P)SHUTTER:CLOSE PP")
 }
