@@ -7,6 +7,11 @@ getStatus {
     in "\&A%d,I%(\$1)d!";
 }
 
+moveShutter {
+    out "%{\&OPENA!|\&CLOSEA!}";
+    in "\&ACK!";
+}
+
 openShutter {
     out "\&OPENA!";
     in "\&ACK!";

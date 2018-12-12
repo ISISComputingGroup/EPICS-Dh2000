@@ -18,10 +18,10 @@ record(bo, "$(P)DISABLE")
     field(ONAM, "COMMS DISABLED")
 }
 
-record(bi, "$(P)INTERLOCK"){
+record(bi, "$(P)INTERLOCK:RBV"){
     field(DESC, "Status of the interlock")
     field(SCAN, "Passive")
-    field(ZNAM, "OKAY")
+    field(ZNAM, "OK")
     field(ONAM, "TRIGGERED")
 
     field(OSV, "MAJOR")
@@ -34,13 +34,30 @@ record(bi, "$(P)INTERLOCK"){
 
 }
 
-record(bi, "$(P)SHUTTER:STATUS"){
+record(mbbo, "$(P)SHUTTER:SP") {
+    field(DESC, "Toggle shutter open/closed")
+    field(DTYP, "stream")
+
+    # Defines which PV to process in the fanout record
+    field(OUT, "@dh2000.proto moveShutter $(PORT)")
+
+    field(ZRST, "Open")
+    field(ONST, "Close")
+
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(bi, "$(P)SHUTTER:RBV"){
     field(DESC, "Status of the shutter")
     field(DTYP, "stream")
-    field(ZNAM, "CLOSED")
-    field(ONAM, "OPEN")
+    field(ZNAM, "Closed")
+    field(ONAM, "Open")
     field(SCAN, "1 second")
-    field(INP, "@dh2000.proto getStatus($(P)INTERLOCK) $(PORT)")
+    field(INP, "@dh2000.proto getStatus($(P)INTERLOCK:RBV) $(PORT)")
 
     info(INTEREST, "HIGH")
     info(archive, "VAL")
