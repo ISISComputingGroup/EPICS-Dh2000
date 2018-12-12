@@ -28,21 +28,22 @@ record(bi, "$(P)INTERLOCK:RBV"){
 
     info(INTEREST, "HIGH")
     info(archive, "VAL")
+    info(alarm, "DH2000")
 
     field(SIML, "$(P)SIM")
     field(SDIS, "$(P)DISABLE")
 
 }
 
-record(mbbo, "$(P)SHUTTER:SP") {
+record(bo, "$(P)SHUTTER:SP") {
     field(DESC, "Toggle shutter open/closed")
     field(DTYP, "stream")
 
     # Defines which PV to process in the fanout record
     field(OUT, "@dh2000.proto moveShutter $(PORT)")
 
-    field(ZRST, "Open")
-    field(ONST, "Close")
+    field(ONAM, "Open")
+    field(ZNAM, "Close")
 
     info(INTEREST, "HIGH")
     info(archive, "VAL")

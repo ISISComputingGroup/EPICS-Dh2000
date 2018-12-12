@@ -8,7 +8,7 @@ getStatus {
 }
 
 moveShutter {
-    out "%{\&OPENA!|\&CLOSEA!}";
+    out "%{\&CLOSEA!|\&OPENA!}";
     in "\&ACK!";
 }
 
