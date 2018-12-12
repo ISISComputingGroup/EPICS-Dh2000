@@ -12,15 +12,3 @@ moveShutter {
     in "\&ACK!";
 }
 
-openShutter {
-    out "\&OPENA!";
-    in "\&ACK!";
-
-}
-
-closeShutter {
-    out "\&CLOSEA!";
-    in "\&ACK!";
-
-}
-
