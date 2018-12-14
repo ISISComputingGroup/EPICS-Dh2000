@@ -1,0 +1,14 @@
+Terminator = '\r';
+ReplyTimeout = 2000;
+
+getStatus {
+    out "\&STS!";
+    in "\&ACK!";
+    in "\n\&A%d,I%(\$1)d!";
+}
+
+moveShutter {
+    out "%{\&CLOSEA!|\&OPENA!}";
+    in "\&ACK!";
+}
+

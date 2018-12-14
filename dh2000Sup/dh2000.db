@@ -1,0 +1,68 @@
+record(bo, "$(P)SIM")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+    field(VAL, "$(RECSIM=0)")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)DISABLE")
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "$(DISABLE=0)")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
+record(bi, "$(P)INTERLOCK:RBV"){
+    field(DESC, "Status of the interlock")
+    field(SCAN, "Passive")
+    field(ZNAM, "OK")
+    field(ONAM, "TRIGGERED")
+
+    field(OSV, "MAJOR")
+
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+    info(alarm, "DH2000")
+
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+
+}
+
+record(bo, "$(P)SHUTTER:SP") {
+    field(DESC, "Toggle shutter open/closed")
+    field(DTYP, "stream")
+
+    # Defines which PV to process in the fanout record
+    field(OUT, "@dh2000.proto moveShutter $(PORT)")
+
+    field(ONAM, "Open")
+    field(ZNAM, "Close")
+
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+}
+
+record(bi, "$(P)SHUTTER:RBV"){
+    field(DESC, "Status of the shutter")
+    field(DTYP, "stream")
+    field(ZNAM, "Closed")
+    field(ONAM, "Open")
+    field(SCAN, "1 second")
+    field(INP, "@dh2000.proto getStatus($(P)INTERLOCK:RBV) $(PORT)")
+
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+
+    field(SIML, "$(P)SIM")
+    field(SDIS, "$(P)DISABLE")
+}
