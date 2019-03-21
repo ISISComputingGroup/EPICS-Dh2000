@@ -1,0 +1,35 @@
+record(bo, "$(P)$(Q)SIM")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(ZNAM, "NO")
+    field(ONAM, "YES")
+    field(VAL, "$(RECSIM=0)")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)$(Q)DISABLE")
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "$(DISABLE=0)")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
+## this sets shutter status via stream device record redirection
+record(bi, "$(P)$(Q)INTERLOCK"){
+    field(DESC, "Status of the interlock")
+    field(DTYP, "stream")
+    field(ZNAM, "OK")
+    field(ONAM, "TRIGGERED")
+    field(SCAN, "1 second")
+    field(INP, "@dh2000.proto getStatus($(P)$(Q)SHUTTER:) $(PORT)")
+    field(SIML, "$(P)$(Q)SIM")
+    field(SDIS, "$(P)$(Q)DISABLE")
+    field(OSV, "MAJOR")
+    info(alarm, "DH2000")
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+}
