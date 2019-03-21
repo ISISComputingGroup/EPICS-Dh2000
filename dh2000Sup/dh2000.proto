@@ -1,14 +1,17 @@
 Terminator = '\r';
 ReplyTimeout = 2000;
 
+## returns interlocak status, sets 
+## shutter A and B status by record redirection
 getStatus {
     out "\&STS!";
     in "\&ACK!";
-    in "\n\&A%d,I%(\$1)d!";
+    in "\n\&A%(\$1A:RAW.A)d,B%(\$1B:RAW.A)d,I%d!";
 }
 
+## pass A or B as protocol argument
+## to choose shutter to act on
 moveShutter {
-    out "%{\&CLOSEA!|\&OPENA!}";
+    out "%{\&CLOSE\$1!|\&OPEN\$1!}";
     in "\&ACK!";
 }
-

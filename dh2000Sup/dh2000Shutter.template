@@ -1,0 +1,27 @@
+
+record(bo, "$(P)$(Q)SHUTTER:$(S):SP") {
+    field(DESC, "Set shutter $(S) open/closed")
+    field(DTYP, "stream")
+
+    # Defines which PV to process in the fanout record
+    field(OUT, "@dh2000.proto moveShutter($(S)) $(PORT)")
+
+    field(ONAM, "Open")
+    field(ZNAM, "Close")
+
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+
+    field(SIML, "$(P)$(Q)SIM")
+    field(SDIS, "$(P)$(Q)DISABLE")
+}
+
+## set by record redirection from stream device
+record(bi, "$(P)$(Q)SHUTTER:$(S)"){
+    field(DESC, "Status of the shutter $(S)")
+    field(ZNAM, "Closed")
+    field(ONAM, "Open")
+    info(INTEREST, "HIGH")
+    info(archive, "VAL")
+}
+
